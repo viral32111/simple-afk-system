@@ -4,12 +4,12 @@ if ( CLIENT ) then return end
 
 hook.Add( "PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 	if ( string.sub( text, 1, 4 ) == "!afk" ) then
-		if ( string.sub( text, 5, nil ) != nil ) then
+		if ( string.sub( text, 6 ) != "" ) then
 			for k, v in pairs( player.GetAll() ) do
 				net.Start("SimpleAFKSystemAnnounce")
-					net.WriteInt( 1 )
+					net.WriteBool( true )
 					net.WriteEntity( ply )
-					net.WriteString( string.sub( text, 5, nil ) )
+					net.WriteString( string.sub( text, 6 ) )
 				net.Send( v )
 			end
 			ply:StripAmmo()
@@ -26,7 +26,7 @@ hook.Add( "PlayerSay", "SimpleAFKSystemReturn", function( ply, text, team )
 	if ( string.sub( text, 1, 7 ) == "!return" ) then
 		for k, v in pairs( player.GetAll() ) do
 			net.Start("SimpleAFKSystemAnnounce")
-				net.WriteInt( 2 )
+				net.WriteBool( false )
 				net.WriteEntity( ply )
 			net.Send( v )
 		end

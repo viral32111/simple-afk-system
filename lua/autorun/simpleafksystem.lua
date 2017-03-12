@@ -1,7 +1,7 @@
 -- Copyright 2017 viral32111. https://github.com/viral32111/simple-afk-system/blob/master/LICENCE
 
-addonVersion = "2.1.0"
-versionchecked = false
+local addonVersion = "2.1.0"
+local versionchecked = false
 
 if ( SERVER ) then
 	print("[Simple AFK System] Loading...")
