@@ -1,6 +1,14 @@
-# Simple AFK System
-#### Version: 2.0.1
+Simple AFK System
+==========
+#### Current Version: 2.1.0
 
-This is the Simple AFK System addon for Garry's Mod. I don't update this addon anymore instead use my addon called 'Away' its a cleaned up version with alot more features
+Better way to go AFK while your playing.
 
-###### [Copyright 2017 viral32111](https://github.com/viral32111/simpleafksystem/blob/master/LICENSE)
+It's better because:
+* It allows you to give a reason for being AFK.
+* It stops players from killing you.
+* It informs other players that you are AFK (Text above head and by chat).
+
+This addon is also on the workshop!, Check it out [here](http://steamcommunity.com)
+
+###### [Copyright 2017 viral32111](https://github.com/viral32111/simple-afk-system/blob/master/LICENSE)
