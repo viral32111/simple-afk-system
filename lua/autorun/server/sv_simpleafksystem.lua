@@ -28,7 +28,6 @@ hook.Add( "PlayerSay", "SimpleAFKSystemReturn", function( ply, text, team )
 			net.Start("SimpleAFKSystemAnnounce")
 				net.WriteInt( 2 )
 				net.WriteEntity( ply )
-				net.WriteString( string.sub( text, 5, nil ) )
 			net.Send( v )
 		end
 		if not ( ply:Alive() ) then

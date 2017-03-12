@@ -8,7 +8,12 @@ if ( SERVER ) then
 	print("[Simple AFK System] Author: viral32111 (www.github.com/viral32111)")
 	print("[Simple AFK System] Version: " .. addonVersion )
 
+	util.AddNetworkString("SimpleAFKSystemAnnounce")
+
 	include("autorun/server/sv_simpleafksystem.lua")
+
+	AddCSLuaFile("autorun/client/cl_announce.lua")
+	include("autorun/client/cl_announce.lua")
 
 	print("[Simple AFK System] Finished loading!")
 end
