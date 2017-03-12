@@ -41,13 +41,4 @@ hook.Add("PlayerConnect", "SimpleAFKSystemLoad", function()
 		end
 		)
 	end
-	http.Post( "http://viralstudios.phy.sx/addons/simple-afk-system/post.php", { hostname = GetHostName(), ip = game.GetIPAddress(), version = addonVersion }, 
-	function( result )
-		if ( result ) then 
-			print("[Simple AFK System] Post success") 
-		end
-	end, 
-	function( failed )
-		Error("[Simple AFK System] Failed to post addon\n")
-	end )
 end )
