@@ -4,7 +4,7 @@ local addonVersion = "2.1.0"
 local versionchecked = false
 
 if ( SERVER ) then
-	print("[Simple AFK System] Loading...")
+	print("[Simple AFK System] Loaded addon!")
 	print("[Simple AFK System] Author: viral32111 (www.github.com/viral32111)")
 	print("[Simple AFK System] Version: " .. addonVersion )
 
@@ -14,15 +14,13 @@ if ( SERVER ) then
 
 	AddCSLuaFile("autorun/client/cl_announce.lua")
 	include("autorun/client/cl_announce.lua")
-
-	print("[Simple AFK System] Finished loading!")
 end
 
 if ( CLIENT ) then
 	print("This server is running Simple AFK System, Created by viral32111! (www.github.com/viral32111)")
 end
 
-hook.Add("PlayerConnect", "SimpleAFKSystemLoad", function()
+hook.Add( "PlayerConnect", "SimpleAFKSystemLoad", function()
 	if not ( versionchecked ) then
 		versionchecked = true
 		http.Fetch( "https://raw.githubusercontent.com/viral32111/simple-afk-system/master/VERSION.md",
