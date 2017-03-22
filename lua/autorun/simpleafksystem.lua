@@ -1,6 +1,6 @@
 -- Copyright 2017 viral32111. https://github.com/viral32111/simple-afk-system/blob/master/LICENCE
 
-local addonVersion = "2.1.0"
+local addonVersion = "2.1.1"
 local versionchecked = false
 
 if ( SERVER ) then
@@ -10,10 +10,10 @@ if ( SERVER ) then
 
 	util.AddNetworkString("SimpleAFKSystemAnnounce")
 
-	include("autorun/server/sv_simpleafksystem.lua")
+	include("autorun/server/sv_afk_chatcommands.lua")
 
-	AddCSLuaFile("autorun/client/cl_announce.lua")
-	include("autorun/client/cl_announce.lua")
+	AddCSLuaFile("autorun/client/cl_afk_announce.lua")
+	include("autorun/client/cl_afk_announce.lua")
 end
 
 if ( CLIENT ) then

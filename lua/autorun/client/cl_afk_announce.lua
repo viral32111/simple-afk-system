@@ -9,8 +9,8 @@ net.Receive( "SimpleAFKSystemAnnounce", function()
 	if ( mode ) then	
 		local reason = net.ReadString()
 
-		chat.AddText( Color( 0, 180, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), ply:Nick() .. " is now AFK! (" .. reason .. ")" )
+		chat.AddText( Color( 26, 198, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), ply:Nick() .. " is now AFK!", Color( 255, 255, 0 ), " (" .. reason .. ")" )
 	else
-		chat.AddText( Color( 0, 180, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), ply:Nick() .. " has returned to the game!" )
+		chat.AddText( Color( 26, 198, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), ply:Nick() .. " has returned to the game!" )
 	end
 end )
