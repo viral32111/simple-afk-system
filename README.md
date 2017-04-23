@@ -1,6 +1,6 @@
 Simple AFK System
 ==========
-#### Current Version: 2.1.2
+#### Current Version: 2.1.3
 
 Better way to go AFK while your playing.
 
@@ -8,6 +8,10 @@ It's better because:
 * It allows you to give a reason for being AFK.
 * It stops players from killing you.
 * It informs other players that you are AFK (Text above head and by chat).
+
+Chat Commands:
+* !afk (reason) : Makes you AFK
+* !notafk : Returns you to the game
 
 This addon is also on the workshop!, Check it out [here](http://steamcommunity.com)
 

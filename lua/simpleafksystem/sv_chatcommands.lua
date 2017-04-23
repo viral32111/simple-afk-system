@@ -26,7 +26,7 @@ end )
 
 hook.Add( "PlayerSay", "SimpleAFKSystemReturn", function( ply, text, team )
 	local text = string.lower( text )
-	if ( string.sub( text, 1, 7 ) == "!return" ) then
+	if ( string.sub( text, 1, 7 ) == "!notafk" ) then
 		for k, v in pairs( player.GetAll() ) do
 			net.Start("SimpleAFKSystemAnnounce")
 				net.WriteBool( false )
