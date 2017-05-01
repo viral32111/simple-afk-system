@@ -1,6 +1,6 @@
 -- Copyright 2017 viral32111. https://github.com/viral32111/simple-afk-system/blob/master/LICENCE
 
-local SimpleAFKSystemVersion = "2.1.3"
+local SimpleAFKSystemVersion = "2.1.4"
 local SimpleAFKSystemVersionChecked = false
 
 if ( SERVER ) then

@@ -1,6 +1,6 @@
 Simple AFK System
 ==========
-#### Current Version: 2.1.3
+#### Current Version: 2.1.4
 
 Better way to go AFK while your playing.
 
