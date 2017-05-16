@@ -2,7 +2,7 @@
 
 if ( CLIENT ) then return end
 
-hook.Add( "PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
+hook.Add("PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 	local text = string.lower( text )
 	if ( string.sub( text, 1, 4 ) == "!afk" ) then
 		if ( string.sub( text, 6 ) != "" ) then
@@ -17,7 +17,14 @@ hook.Add( "PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 					net.Send( v )
 					v:SendLua([[ surface.PlaySound("ambient/levels/canals/windchine1.wav") ]])
 				end
-				ply:StripAmmo()
+				if not ( ply:Alive() ) then
+					ply:Spawn()
+				end
+				file.Write( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt", "" )
+				file.Write( string.Replace( ply:SteamID(), ":", "_" ) .. "_Current.txt", ply:GetActiveWeapon():GetClass() )
+				for _, Weapon in pairs( ply:GetWeapons() ) do
+					file.Append( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt", Weapon:GetClass() .. "\n" )
+				end
 	  			ply:StripWeapons()
 	  			ply:Lock()
 	  			ply:SetCollisionGroup( 20 )
@@ -32,7 +39,7 @@ hook.Add( "PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 	end
 end )
 
-hook.Add( "PlayerSay", "SimpleAFKSystemReturn", function( ply, text, team )
+hook.Add("PlayerSay", "SimpleAFKSystemReturn", function( ply, text, team )
 	local text = string.lower( text )
 	if ( string.sub( text, 1, 7 ) == "!notafk" ) then
 		if ( ply:GetNWBool("IsAFK", false ) ) then
@@ -46,13 +53,14 @@ hook.Add( "PlayerSay", "SimpleAFKSystemReturn", function( ply, text, team )
 			if not ( ply:Alive() ) then
 				ply:Spawn()
 			end
-			ply:StripAmmo()
-	  		ply:StripWeapons()
-	  		ply:Give("weapon_physgun")
-	  		ply:Give("weapon_physcannon")
-		    ply:Give("gmod_tool")
-		    ply:Give("gmod_camera")
-		    ply:SelectWeapon("weapon_physgun")
+			ply:StripWeapons()
+			local Weapons = string.Explode("\n", file.Read( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt", "DATA" ) )
+			for _, Weapon in pairs( Weapons ) do
+				ply:Give( Weapon )
+			end
+			ply:SelectWeapon( file.Read( string.Replace( ply:SteamID(), ":", "_" ) .. "_Current.txt", "DATA" ) )
+			file.Delete( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt" )
+			file.Delete( string.Replace( ply:SteamID(), ":", "_" ) .. "_Current.txt" )
 		    ply:UnLock()
 		    ply:SetCollisionGroup( 0 )
 		    ply:SetColor( Color( 255, 255, 255, 255 ) )

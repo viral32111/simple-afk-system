@@ -1,6 +1,6 @@
 -- Copyright 2017 viral32111. https://github.com/viral32111/simple-afk-system/blob/master/LICENCE
 
-local SimpleAFKSystemVersion = "2.1.4"
+local SimpleAFKSystemVersion = "2.1.5"
 local SimpleAFKSystemVersionChecked = false
 
 if ( SERVER ) then
@@ -10,8 +10,8 @@ if ( SERVER ) then
 
 	include("simpleafksystem/sv_chatcommands.lua")
 
-	AddCSLuaFile("autorun/client/cl_afk_announce.lua")
-	include("autorun/client/cl_afk_announce.lua")
+	AddCSLuaFile("autorun/client/cl_simpleafksystem.lua")
+	include("autorun/client/cl_simpleafksystem.lua")
 end
 
 if ( CLIENT ) then

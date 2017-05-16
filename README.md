@@ -1,13 +1,18 @@
 Simple AFK System
 ==========
-#### Current Version: 2.1.4
+#### Current Version: 2.1.5
 
-Better way to go AFK while your playing.
+A feature rich AFK system for any gamemode in Garry's Mod.
 
-It's better because:
-* It allows you to give a reason for being AFK.
-* It stops players from killing you.
-* It informs other players that you are AFK (Text above head and by chat).
+Features:
+* Allows you to provide a reason
+* Stops other players from interacting with you
+* Blocks the player from doing anything when there AFK
+* Informs other players that your AFK
+* Info on HUD when your AFK
+* Remembers your weapons
+* Remembers your active weapon
+* Remembers your ammo
 
 Chat Commands:
 * !afk (reason) : Makes you AFK
