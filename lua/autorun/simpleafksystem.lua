@@ -1,6 +1,6 @@
 -- Copyright 2017 viral32111. https://github.com/viral32111/simple-afk-system/blob/master/LICENCE
 
-local SimpleAFKSystemVersion = "2.1.5"
+local SimpleAFKSystemVersion = "2.1.6"
 local SimpleAFKSystemVersionChecked = false
 
 if ( SERVER ) then
@@ -8,7 +8,7 @@ if ( SERVER ) then
 
 	util.AddNetworkString("SimpleAFKSystemAnnounce")
 
-	include("simpleafksystem/sv_chatcommands.lua")
+	include("autorun/server/sv_simpleafksystem.lua")
 
 	AddCSLuaFile("autorun/client/cl_simpleafksystem.lua")
 	include("autorun/client/cl_simpleafksystem.lua")
@@ -18,7 +18,7 @@ if ( CLIENT ) then
 	print("This server is running Simple AFK System, Created by viral32111! (www.github.com/viral32111)")
 end
 
-hook.Add( "PlayerConnect", "SimpleAFKSystemVersionCheck", function()
+hook.Add("PlayerConnect", "SimpleAFKSystemVersionCheck", function()
 	if not ( SimpleAFKSystemVersionChecked ) then
 		SimpleAFKSystemVersionChecked = true
 		http.Fetch( "https://raw.githubusercontent.com/viral32111/simple-afk-system/master/VERSION.md",
