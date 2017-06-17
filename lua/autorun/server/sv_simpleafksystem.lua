@@ -85,7 +85,7 @@ end )
 					net.WriteBool( false )
 					net.WriteEntity( ply )
 				net.Send( v )
-				v:SendLua([[ surface.PlaySound("ambient/levels/canals/windchime2.wav") ]])
+				v:SendLua([[ surface.PlaySound("ambient/levels/canals/windchime2.wav") ]]--)
 			--[[end
 			if not ( ply:Alive() ) then
 				ply:Spawn()
@@ -104,7 +104,7 @@ end )
 			ply:SetRenderMode( RENDERMODE_NORMAL )
 		    ply:SetNWBool("IsAFK", false )
 		else
-			ply:SendLua([[ chat.AddText( Color( 26, 198, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), "You are not AFK" ) ]])
+			ply:SendLua([[ chat.AddText( Color( 26, 198, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), "You are not AFK" ) ]]--)
 		--[[end
 		return ""
 	end
