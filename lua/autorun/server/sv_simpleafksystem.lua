@@ -75,37 +75,3 @@ hook.Add("PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 		return ""
 	end
 end )
-
---[[hook.Add("PlayerSay", "SimpleAFKSystemReturn", function( ply, text, team )
-	local text = string.lower( text )
-	if ( string.sub( text, 1, 7 ) == "!notafk" ) then
-		if ( ply:GetNWBool("IsAFK", false ) ) then
-			for k, v in pairs( player.GetAll() ) do
-				net.Start("SimpleAFKSystemAnnounce")
-					net.WriteBool( false )
-					net.WriteEntity( ply )
-				net.Send( v )
-				v:SendLua([[ surface.PlaySound("ambient/levels/canals/windchime2.wav") ]]--)
-			--[[end
-			if not ( ply:Alive() ) then
-				ply:Spawn()
-			end
-			ply:StripWeapons()
-			local Weapons = string.Explode("\n", file.Read( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt", "DATA" ) )
-			for _, Weapon in pairs( Weapons ) do
-				ply:Give( Weapon )
-			end
-			ply:SelectWeapon( file.Read( string.Replace( ply:SteamID(), ":", "_" ) .. "_Current.txt", "DATA" ) )
-			file.Delete( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt" )
-			file.Delete( string.Replace( ply:SteamID(), ":", "_" ) .. "_Current.txt" )
-		    ply:UnLock()
-		    ply:SetCollisionGroup( 0 )
-		    ply:SetColor( Color( 255, 255, 255, 255 ) )
-			ply:SetRenderMode( RENDERMODE_NORMAL )
-		    ply:SetNWBool("IsAFK", false )
-		else
-			ply:SendLua([[ chat.AddText( Color( 26, 198, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), "You are not AFK" ) ]]--)
-		--[[end
-		return ""
-	end
-end )]]

@@ -30,6 +30,6 @@ hook.Add("HUDPaint", "SimpleAFKSystemHUD", function()
 	local ply = LocalPlayer()
 
 	if ( ply:GetNWBool("IsAFK", false ) ) then
-		draw.DrawText("Your AFK!\nTo return to the game type !notafk", "SimpleAFKSystemHUDFont", ScrW()/2, 400, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER )
+		draw.DrawText("Your AFK!\nTo return to the game type !afk", "SimpleAFKSystemHUDFont", ScrW()/2, 400, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER )
 	end
 end )

@@ -1,6 +1,6 @@
 Simple AFK System
 ==========
-#### Current Version: 2.1.6
+#### Current Version: 2.1.7
 
 A feature rich AFK system for any gamemode in Garry's Mod.
 
