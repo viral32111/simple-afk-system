@@ -35,7 +35,7 @@ end
 hook.Add("PlayerConnect", "SimpleAFKSystemVersionCheck", function()
 	if not ( SimpleAFKSystemVersionChecked ) then
 		SimpleAFKSystemVersionChecked = true
-		http.Fetch( "https://raw.githubusercontent.com/viral32111/simple-afk-system/master/VERSION.md",
+		http.Fetch( "https://raw.githubusercontent.com/viral32111/simple-afk-system/master/VERSION.txt",
 		function( body, len, headers, code )
 			local formattedBody = string.gsub( body, "\n", "")
 			if ( formattedBody == SimpleAFKSystemVersion ) then
