@@ -18,4 +18,4 @@ Features:
 
 This addon is also on the workshop!, Check it out [here](http://steamcommunity.com/sharedfiles/filedetails/?id=884852300)
 
-###### [Copyright 2017 viral32111](https://github.com/viral32111/simple-afk-system/blob/master/LICENSE)
+###### [Copyright 2017 viral32111](https://github.com/viral32111/simple-afk-system/blob/master/LICENSE.txt)
