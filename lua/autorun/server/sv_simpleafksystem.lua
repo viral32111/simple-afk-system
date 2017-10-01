@@ -17,8 +17,8 @@ limitations under the License.
 if ( CLIENT ) then return end
 
 hook.Add("PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
-	local text = string.lower( text )
-	if ( string.sub( text, 1, 4 ) == "!afk" ) then
+	local text_lowered = string.lower( text )
+	if ( string.sub( text_lowered, 1, 4 ) == "!afk" ) then
 		if ( ply:GetNWBool("IsAFK", false ) ) then
 			-- Run everything to make the player not AFK
 			for k, v in pairs( player.GetAll() ) do
@@ -54,7 +54,7 @@ hook.Add("PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 			ply:SetNWBool("IsAFK", false )
 		else
 			-- If the player is wanting to enter afk make sure to ask for a reason
-			if ( string.sub( text, 6 ) != "" ) then
+			if ( string.sub( text_lowered, 6 ) != "" ) then
 				for k, v in pairs( player.GetAll() ) do
 					net.Start("SimpleAFKSystemAnnounce")
 						net.WriteBool( true )
