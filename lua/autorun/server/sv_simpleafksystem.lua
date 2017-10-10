@@ -36,16 +36,17 @@ hook.Add("PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 
 			ply:StripWeapons()
 
-			local Weapons = string.Explode("\n", file.Read( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt", "DATA" ) )
-			
-			for _, Weapon in pairs( Weapons ) do
-				ply:Give( Weapon )
+			local Weapons = string.Explode(";", file.Read( ply:SteamID64() .. ".txt", "DATA" ) )
+
+			file.Delete( ply:SteamID64() .. ".txt" )
+
+			for ID, Weapon in pairs( Weapons ) do
+				if ( ID != 1 ) then
+					ply:Give( Weapon )
+				end
 			end
 
-			ply:SelectWeapon( file.Read( string.Replace( ply:SteamID(), ":", "_" ) .. "_Current.txt", "DATA" ) )
-			
-			file.Delete( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt" )
-			file.Delete( string.Replace( ply:SteamID(), ":", "_" ) .. "_Current.txt" )
+			ply:SelectWeapon( Weapons[1] )
 			
 			ply:UnLock()
 			ply:SetCollisionGroup( 0 )
@@ -69,11 +70,10 @@ hook.Add("PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 					ply:Spawn()
 				end
 
-				file.Write( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt", "" )
-				file.Write( string.Replace( ply:SteamID(), ":", "_" ) .. "_Current.txt", ply:GetActiveWeapon():GetClass() )
+				file.Write( ply:SteamID64() .. ".txt", ply:GetActiveWeapon():GetClass() .. ";" )
 				
 				for _, Weapon in pairs( ply:GetWeapons() ) do
-					file.Append( string.Replace( ply:SteamID(), ":", "_" ) .. ".txt", Weapon:GetClass() .. "\n" )
+					file.Append( ply:SteamID64() .. ".txt", Weapon:GetClass() .. ";" )
 				end
 
 	  			ply:StripWeapons()
@@ -87,5 +87,14 @@ hook.Add("PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 			end
 		end
 		return ""
+	end
+end )
+
+--[[-------------------------------------------------------------------------
+Delete there data files if they leave while their AFK
+---------------------------------------------------------------------------]]
+hook.Add("PlayerDisconnected", "SimpleAFKSystemLeave", function( ply )
+	if ( file.Exists( ply:SteamID64() .. ".txt", "DATA" ) ) then
+		file.Delete( ply:SteamID64() .. ".txt" )
 	end
 end )

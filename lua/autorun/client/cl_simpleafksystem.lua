@@ -16,11 +16,6 @@ limitations under the License.
 
 if ( SERVER ) then return end
 
-surface.CreateFont("SimpleAFKSystemHUDFont", {
-	font = "Trebuchet MS",
-	size = 40
-})
-
 --[[-------------------------------------------------------------------------
 Announcement
 ---------------------------------------------------------------------------]]
@@ -38,12 +33,13 @@ net.Receive("SimpleAFKSystemAnnounce", function()
 end )
 
 --[[-------------------------------------------------------------------------
-HUD When AFK
+AFK HUD
 ---------------------------------------------------------------------------]]
 hook.Add("HUDPaint", "SimpleAFKSystemHUD", function()
 	local ply = LocalPlayer()
 
 	if ( ply:GetNWBool("IsAFK", false ) ) then
-		draw.DrawText("Your AFK!\nTo return to the game type !afk", "SimpleAFKSystemHUDFont", ScrW()/2, 400, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER )
+		draw.RoundedBox( 5, ScrW()/2-130, ScrH()-65, 260, 50, Color( 0, 0, 0, 200 ) )
+		draw.DrawText("You are currently AFK!\nTo return to the game type !afk", "TargetID", ScrW()/2, ScrH()-60, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER )
 	end
 end )
