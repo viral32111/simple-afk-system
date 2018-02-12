@@ -19,46 +19,58 @@ if ( CLIENT ) then return end
 hook.Add("PlayerSay", "SimpleAFKSystemAFK", function( ply, text, team )
 	local text_lowered = string.lower( text )
 	if ( string.sub( text_lowered, 1, 4 ) == "!afk" ) then
-		if ( ply:GetNWBool("IsAFK", false ) ) then
-			-- Run everything to make the player not AFK
-			for k, v in pairs( player.GetAll() ) do
-				net.Start("SimpleAFKSystemAnnounce")
-					net.WriteBool( false )
-					net.WriteEntity( ply )
-				net.Send( v )
-				
-				v:SendLua([[ surface.PlaySound("ambient/levels/canals/windchime2.wav") ]])
-			end
+		if ( ply:GetNWBool("IsAFK" ) ) then
+			if ( string.sub( text_lowered, 6 ) != "" ) then -- Update your AFK reason!
+				for k, v in pairs( player.GetAll() ) do
+					net.Start("SimpleAFKSystemAnnounce")
+						net.WriteInt( 3, 32 )
+						net.WriteEntity( ply )
+						net.WriteString( string.sub( text, 6 ) )
+					net.Send( v )
 
-			if not ( ply:Alive() ) then
-				ply:Spawn()
-			end
-
-			ply:StripWeapons()
-
-			local Weapons = string.Explode(";", file.Read( ply:SteamID64() .. ".txt", "DATA" ) )
-
-			file.Delete( ply:SteamID64() .. ".txt" )
-
-			for ID, Weapon in pairs( Weapons ) do
-				if ( ID != 1 ) then
-					ply:Give( Weapon )
+					v:SendLua([[ surface.PlaySound("ambient/levels/canals/windchine1.wav") ]])
 				end
-			end
+			else
+				-- Run everything to make the player not AFK
+				for k, v in pairs( player.GetAll() ) do
+					net.Start("SimpleAFKSystemAnnounce")
+						net.WriteInt( 2, 32 )
+						net.WriteEntity( ply )
+					net.Send( v )
+					
+					v:SendLua([[ surface.PlaySound("ambient/levels/canals/windchime2.wav") ]])
+				end
 
-			ply:SelectWeapon( Weapons[1] )
-			
-			ply:UnLock()
-			ply:SetCollisionGroup( 0 )
-			ply:SetColor( Color( 255, 255, 255, 255 ) )
-			ply:SetRenderMode( RENDERMODE_NORMAL )
-			ply:SetNWBool("IsAFK", false )
+				if not ( ply:Alive() ) then
+					ply:Spawn()
+				end
+
+				ply:StripWeapons()
+
+				local Weapons = string.Explode(";", file.Read( ply:SteamID64() .. ".txt", "DATA" ) )
+
+				file.Delete( ply:SteamID64() .. ".txt" )
+
+				for ID, Weapon in pairs( Weapons ) do
+					if ( ID != 1 ) then
+						ply:Give( Weapon )
+					end
+				end
+
+				ply:SelectWeapon( Weapons[1] )
+				
+				ply:UnLock()
+				ply:SetCollisionGroup( 0 )
+				ply:SetColor( Color( 255, 255, 255, 255 ) )
+				ply:SetRenderMode( RENDERMODE_NORMAL )
+				ply:SetNWBool("IsAFK", false )
+			end
 		else
 			-- If the player is wanting to enter afk make sure to ask for a reason
 			if ( string.sub( text_lowered, 6 ) != "" ) then
 				for k, v in pairs( player.GetAll() ) do
 					net.Start("SimpleAFKSystemAnnounce")
-						net.WriteBool( true )
+						net.WriteInt( 1, 32 )
 						net.WriteEntity( ply )
 						net.WriteString( string.sub( text, 6 ) )
 					net.Send( v )

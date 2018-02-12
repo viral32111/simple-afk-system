@@ -14,11 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ---------------------------------------------------------------------------]]
 
-local SimpleAFKSystemVersion = "2.2.0"
-local SimpleAFKSystemVersionChecked = false
+local Version = "2.2.1"
 
 if ( SERVER ) then
-	print("[Simple AFK System] Loaded! (Author: viral32111) (Version: " .. SimpleAFKSystemVersion .. ")")
+	print("[Simple AFK System] Loaded Version: " .. Version )
 
 	util.AddNetworkString("SimpleAFKSystemAnnounce")
 
@@ -29,26 +28,23 @@ if ( SERVER ) then
 end
 
 if ( CLIENT ) then
-	print("This server is running Simple AFK System, Created by viral32111! (www.github.com/viral32111)")
+	print("This server is running Simple AFK System, Created by viral32111!")
 end
 
-hook.Add("PlayerConnect", "SimpleAFKSystemVersionCheck", function()
-	if not ( SimpleAFKSystemVersionChecked ) then
-		SimpleAFKSystemVersionChecked = true
-		http.Fetch( "https://raw.githubusercontent.com/viral32111/simple-afk-system/master/VERSION.txt",
-		function( body, len, headers, code )
-			local formattedBody = string.gsub( body, "\n", "")
-			if ( formattedBody == SimpleAFKSystemVersion ) then
-				MsgC( Color( 0, 255, 0 ), "[Simple AFK System] You are running the most recent version of Simple AFK System!\n")
-			elseif ( formattedBody == "404: Not Found" ) then
-				MsgC( Color( 255, 0, 0 ), "[Simple AFK System] Version page does not exist\n")
-			else
-				MsgC( Color( 255, 255, 0 ), "[Simple AFK System] You are using outdated version of Simple AFK System! (Latest: " .. formattedBody .. ", Yours: " .. SimpleAFKSystemVersion .. ")\n" )
-			end
-		end,
-		function( error )
-			MsgC( Color( 255, 0, 0 ), "[Simple AFK System] Failed to get addon version\n")
+hook.Add( "PlayerConnect", "SimpleAFKSystemVersionCheck", function()
+	http.Fetch( "https://raw.githubusercontent.com/viral32111/simple-afk-system/master/VERSION.txt", function( body, len, headers, code )
+		local body = string.gsub( body, "\n", "" )
+		if ( body == Version ) then
+			print( "[Simple AFK System] You are running the most recent version of Simple AFK System!" )
+		elseif ( body == "404: Not Found" ) then
+			print( "[Simple AFK System] Version page does not exist")
+		else
+			print( "[Simple AFK System] You are using outdated version of Simple AFK System! (Latest: " .. body .. ", Current: " .. Version .. ")" )
 		end
-		)
-	end
+	end,
+	function( error )
+		print( "[Simple AFK System] Failed to get addon version! (" .. error .. ")" )
+	end )
+
+	hook.Remove( "PlayerConnect", "SimpleAFKSystemVersionCheck" )
 end )

@@ -20,15 +20,19 @@ if ( SERVER ) then return end
 Announcement
 ---------------------------------------------------------------------------]]
 net.Receive("SimpleAFKSystemAnnounce", function()
-	local mode = net.ReadBool()
+	local mode = net.ReadInt( 32 )
 	local ply = net.ReadEntity()
 
-	if ( mode ) then	
+	if ( mode == 1 ) then	
 		local reason = net.ReadString()
 
 		chat.AddText( Color( 26, 198, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), ply:Nick() .. " is now AFK!", Color( 255, 255, 0 ), " (" .. reason .. ")" )
-	else
+	elseif ( mode == 2 ) then
 		chat.AddText( Color( 26, 198, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), ply:Nick() .. " has returned to the game!" )
+	elseif ( mode == 3 ) then
+		local reason = net.ReadString()
+
+		chat.AddText( Color( 26, 198, 255 ), "(Simple AFK System) ", Color( 255, 255, 255 ), ply:Nick() .. " has changed their AFK status.", Color( 255, 255, 0 ), " (" .. reason .. ")" )
 	end
 end )
 
@@ -40,6 +44,6 @@ hook.Add("HUDPaint", "SimpleAFKSystemHUD", function()
 
 	if ( ply:GetNWBool("IsAFK", false ) ) then
 		draw.RoundedBox( 5, ScrW()/2-130, ScrH()-65, 260, 50, Color( 0, 0, 0, 200 ) )
-		draw.DrawText("You are currently AFK!\nTo return to the game type !afk", "TargetID", ScrW()/2, ScrH()-60, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER )
+		draw.DrawText("You are currently AFK!\nTo return to the game type !afk", "TargetID", ScrW()/2, ScrH()-59, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER )
 	end
 end )
