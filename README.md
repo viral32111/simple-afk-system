@@ -19,7 +19,6 @@ Features:
 This addon includes a few hooks and functions for developers to use.
 ```lua
 -- All hooks are in both server and client realms.
-
 -- afkSystemPlayerEnter is called when the player becomes AFK.
 hook.Add("afkSystemPlayerEnter", "playerIsNowAFK", function(ply, reason)
 	print(ply:Nick() .. " is now AFK because " .. reason)
