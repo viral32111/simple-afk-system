@@ -14,7 +14,7 @@ Features:
 * Remembers your active weapon
 * Remembers your ammo
 * Change AFK reason while your AFK.
-* Admins can 'AFK Locations' where the player will be teleported to.
+* Admins can set 'AFK Locations' where the player will be teleported to.
 
 This addon includes a few hooks and functions for developers to use.
 ```lua
