@@ -6,13 +6,13 @@ A feature rich AFK system for any gamemode in Garry's Mod.
 Type !afk in chat to toggle AFK mode!
 
 Features:
-* Allows you to provide a reason
-* Stops other players from interacting with you
-* Blocks the player from doing anything when there AFK
-* Informs other players that your AFK
-* Remembers your weapons
-* Remembers your active weapon
-* Remembers your ammo
+* Allows you to provide a reason.
+* Stops other players from interacting with you.
+* Blocks the player from doing anything when there AFK.
+* Informs other players that your AFK.
+* Remembers your weapons.
+* Remembers your active weapon.
+* Remembers your ammo.
 * Change AFK reason while your AFK.
 * Admins can set 'AFK Locations' where the player will be teleported to.
 
