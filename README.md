@@ -1,5 +1,5 @@
 # Simple AFK System
-#### Version: 221
+#### Version: 222
 
 A feature rich AFK system for any gamemode in Garry's Mod.
 
@@ -14,8 +14,33 @@ Features:
 * Remembers your active weapon
 * Remembers your ammo
 * Change AFK reason while your AFK.
+* Admins can 'AFK Locations' where the player will be teleported to.
 
-For developers, This includes 2 global variables: `SimpleAFKSystem.Version` (Returns the version number, interger) and `SimpleAFKSystem.Name` (Returns the display name of the addon, string)
+This addon includes a few hooks and functions for developers to use.
+```lua
+-- All hooks are in both server and client realms.
+
+-- afkSystemPlayerEnter is called when the player becomes AFK.
+hook.Add("afkSystemPlayerEnter", "playerIsNowAFK", function(ply, reason)
+	print(ply:Nick() .. " is now AFK because " .. reason)
+end)
+
+-- afkSystemPlayerUpdate is called when the player updates their reason.
+hook.Add("afkSystemPlayerUpdate", "playerUpdateReason", function(ply, reason)
+	print(ply:Nick() .. " updated their AFK reason to " .. reason)
+end)
+
+-- afkSystemPlayerLeave is called when the player returns to the game.
+hook.Add("afkSystemPlayerLeave", "playerIsNowAFK", function(ply)
+	print(ply:Nick() .. " has returned to the game.")
+end)
+
+-- All functions are in both server and client realms.
+-- 'PLAYER' in this case is a player object.
+PLAYER:isAFK() -- Is the player AFK? Returns a boolean either true or false.
+PLAYER:afkReason() -- Reason for AFK. Returns a string.
+PLAYER:afkTime() -- Time they started being AFK. Returns a timestamp integer. (`os.time()`)
+```
 
 [Donate](https://viral32111.com/donate)
 

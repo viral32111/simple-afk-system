@@ -14,33 +14,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ---------------------------------------------------------------------------]]
 
-SimpleAFKSystem = {}
-SimpleAFKSystem.Version = 221
-SimpleAFKSystem.Name = "Simple AFK System"
+local version = 222
 
-AddCSLuaFile("autorun/client/cl_simpleafksystem.lua")
+AddCSLuaFile("autorun/client/cl_announce.lua")
+AddCSLuaFile("autorun/client/cl_hud.lua")
+AddCSLuaFile("autorun/client/cl_menu.lua")
 
-if ( SERVER ) then
-	util.AddNetworkString("SimpleAFKSystemAnnounce")
-end
+AddCSLuaFile("autorun/shared/sh_functions.lua")
+include("autorun/shared/sh_functions.lua")
 
-hook.Add("PlayerConnect", SimpleAFKSystem.Name .. "VersionCheck", function()
-	http.Fetch("https://raw.githubusercontent.com/viral32111/simple-afk-system/master/README.md", function( LatestVersion )
-		local LatestVersion = tonumber( string.sub( LatestVersion, string.len( SimpleAFKSystem.Name )+18, string.len( SimpleAFKSystem.Name )+21 ) )
-		if ( LatestVersion == SimpleAFKSystem.Version ) then
-			print("[" .. SimpleAFKSystem.Name .. "] You are running the latest version!")
-		elseif ( LatestVersion > SimpleAFKSystem.Version ) then
-			print("[" .. SimpleAFKSystem.Name .. "] You are running an outdated version! (Latest: " .. LatestVersion .. ", Current: " .. SimpleAFKSystem.Version .. ")")
-		elseif ( LatestVersion < SimpleAFKSystem.Version ) then
-			print("[" .. SimpleAFKSystem.Name .. "] You are running a future version, Please reinstall the addon. (Latest: " .. LatestVersion .. ", Current: " .. SimpleAFKSystem.Version .. ")")
-		else
-			print("[" .. SimpleAFKSystem.Name .. "] Failed to parse addon version! (Latest: " .. LatestVersion .. ", Current: " .. SimpleAFKSystem.Version .. ")")
+hook.Add("PlayerConnect", "afkSystemVersionCheck", function()
+	http.Fetch("https://raw.githubusercontent.com/viral32111/simple-afk-system/master/README.md", function(body, size, headers, code)
+		local latestVersion = tonumber(string.sub(body, string.len("Simple AFK System")+18, string.len("Simple AFK System")+21))
+
+		if (latestVersion != version) then
+			print("[Simple AFK System] Please update the addon to version: " .. latestVersion .. ". You are running version: " .. version .. ".")
 		end
-	end, function( error )
-		print("[" .. SimpleAFKSystem.Name .. "] Failed to get addon version! (" .. error .. ")")
+	end, function(error)
+		print("[Simple AFK System] Failed to get addon version! (" .. error .. ")")
 	end )
 
-	hook.Remove("PlayerConnect", SimpleAFKSystem.Name .. "VersionCheck")
+	hook.Remove("PlayerConnect", "afkSystemVersionCheck")
 end )
 
-print("[" .. SimpleAFKSystem.Name .. "] Loaded Version: " .. SimpleAFKSystem.Version)
+print("[Simple AFK System] Loaded Version: " .. version)
