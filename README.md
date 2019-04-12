@@ -1,9 +1,6 @@
 # Simple AFK System
-#### Version: 222
 
-A feature rich AFK system for any gamemode in Garry's Mod.
-
-Type !afk in chat to toggle AFK mode!
+A simple addon for Garry's Mod that allows a player to toggle being AFK by typing `!afk` in chat.
 
 Features:
 * Allows you to provide a reason.
@@ -16,11 +13,11 @@ Features:
 * Change AFK reason while your AFK.
 * Admins can set 'AFK Locations' where the player will be teleported to.
 
-This addon includes a few hooks and functions for developers to use.
+This addon includes a few hooks and functions for developers to use, examples:
 ```lua
 -- All hooks are in both server and client realms.
 -- afkSystemPlayerEnter is called when the player becomes AFK.
-hook.Add("afkSystemPlayerEnter", "playerIsNowAFK", function(ply, reason)
+hook.Add("afkSystemPlayerEnter", "playerEnteredAFK", function(ply, reason)
 	print(ply:Nick() .. " is now AFK because " .. reason)
 end)
 
@@ -30,19 +27,17 @@ hook.Add("afkSystemPlayerUpdate", "playerUpdateReason", function(ply, reason)
 end)
 
 -- afkSystemPlayerLeave is called when the player returns to the game.
-hook.Add("afkSystemPlayerLeave", "playerIsNowAFK", function(ply)
+hook.Add("afkSystemPlayerLeave", "playerLeftAFK", function(ply)
 	print(ply:Nick() .. " has returned to the game.")
 end)
 
 -- All functions are in both server and client realms.
--- 'PLAYER' in this case is a player object.
+-- 'PLAYER' in this case is a player entity.
 PLAYER:isAFK() -- Is the player AFK? Returns a boolean either true or false.
 PLAYER:afkReason() -- Reason for AFK. Returns a string.
 PLAYER:afkTime() -- Time they started being AFK. Returns a timestamp integer. (`os.time()`)
 ```
 
-[Donate](https://viral32111.com/donate)
+This addon is also available on the [Steam Workshop here](http://steamcommunity.com/sharedfiles/filedetails/?id=884852300).
 
-[Workshop Version](http://steamcommunity.com/sharedfiles/filedetails/?id=884852300)
-
-###### [Copyright 2017-2018 viral32111](LICENCE.txt)
+###### [Copyright 2017-2019 viral32111](LICENCE.md)
