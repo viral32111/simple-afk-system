@@ -1,4 +1,5 @@
 # Simple AFK System
+#### Version: 222
 
 A simple addon for Garry's Mod that allows a player to toggle being AFK by typing `!afk` in chat.
 
