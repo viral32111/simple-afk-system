@@ -41,4 +41,4 @@ PLAYER:afkTime() -- Time they started being AFK. Returns a timestamp integer. (`
 
 This addon is also available on the [Steam Workshop here](http://steamcommunity.com/sharedfiles/filedetails/?id=884852300).
 
-###### [Copyright 2017-2019 viral32111](LICENCE.md)
+###### [Copyright 2017-2020 viral32111](LICENCE.md)
